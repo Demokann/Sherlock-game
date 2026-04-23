@@ -21,7 +21,7 @@ export default function HomePage() {
         <View style={styles.buttonContainer}>
           <Button 
             title="Yeni Oyun" 
-            onPress={() => router.push('/game')} 
+            onPress={() => router.push('/mode-select')} 
           />
           <Button 
             title="Nasıl Oynanır?" 

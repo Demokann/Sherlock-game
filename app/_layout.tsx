@@ -16,10 +16,14 @@ export default function RootLayout() {
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: 'transparent' },
-          animation: 'fade',
+          animation: 'slide_from_right',
+          animationDuration: 250,
+          gestureEnabled: true,
         }}
       >
         <Stack.Screen name="index" />
+        <Stack.Screen name="mode-select" />
+        <Stack.Screen name="story-select" />
         <Stack.Screen name="game" />
         <Stack.Screen name="how-to-play" />
         <Stack.Screen name="settings" />
