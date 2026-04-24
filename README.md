@@ -47,22 +47,19 @@ cd sherlock-game
 Below are some screens from the game:
 
 ### 🏠 Main Menu
-![Menu](./images/menu.png)
+![Menu](./assets/images/menu.png)
 
 ### 🧩 Mode Selection
-![Mode Selection](./images/modselection.png)
-
+![Mode Selection](./assets/assets/images/modselection.png)
 
 ### 🎮 How to Play
-![How to Play](./images/howtoplay.png)
+![How to Play](./assets/images/howtoplay.png)
 
 ### 📖 Game Story
-![Game Story](./images/gamestory.png)
-
+![Game Story](./assets/images/gamestory.png)
 
 ### 🎲 Game Solution
-![Game Solution](./images/gamesolution.png)
+![Game Solution](./assets/images/gamesolution.png)
 
 ### 📚 Stories
-![Stories](./images/stories.png)
-
+![Stories](./assets/images/stories.png)
