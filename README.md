@@ -6,7 +6,7 @@ This project allows people to experience the game independently, even when I’m
 
 ---
 
-##  About the Project
+## About the Project
 
 This game was developed using **React Native (Expo)**. During development, I also used **Gemini CLI** as an AI assistant to help speed up development and improve code quality.
 
@@ -15,7 +15,7 @@ The game includes **4 different agents running concurrently**, each responsible 
 
 ---
 
-##  Game Concept
+## Game Concept
 
 Sherlock Game is a narrative-driven mystery experience where players progress through a story by interacting with clues, decisions, and character-driven events. The goal is to solve the mystery step by step while exploring the storyline.
 
@@ -32,11 +32,37 @@ Originally, the story was only known by me, which made it impossible for others 
 
 ---
 
-##  How to Run Locally
+## How to Run Locally
 
 To run this project on your local machine:
 
 ### 1. Clone the repository
+
 ```bash
 git clone https://github.com/your-username/sherlock-game.git
 cd sherlock-game
+
+## 📸 Screenshots
+
+Below are some screens from the game:
+
+### 🏠 Main Menu
+![Menu](./images/menu.png)
+
+### 🧩 Mode Selection
+![Mode Selection](./images/modselection.png)
+
+
+### 🎮 How to Play
+![How to Play](./images/howtoplay.png)
+
+### 📖 Game Story
+![Game Story](./images/gamestory.png)
+
+
+### 🎲 Game Solution
+![Game Solution](./images/gamesolution.png)
+
+### 📚 Stories
+![Stories](./images/stories.png)
+```
