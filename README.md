@@ -42,24 +42,33 @@ To run this project on your local machine:
 git clone https://github.com/your-username/sherlock-game.git
 cd sherlock-game
 ```
+
 ## 📸 Screenshots
 
 Below are some screens from the game:
 
 ### 🏠 Main Menu
+
 ![Menu](./assets/images/menu.png)
 
 ### 🧩 Mode Selection
+
 ![Mode Selection](./assets/images/modselection.png)
 
 ### 🎮 How to Play
+
 ![How to Play](./assets/images/howtoplay.png)
 
 ### 📖 Game Story
+
 ![Game Story](./assets/images/gamestory.png)
 
 ### 🎲 Game Solution
+
 ![Game Solution](./assets/images/gamesolution.png)
 
 ### 📚 Stories
+
 ![Stories](./assets/images/stories.png)
+
+Made by Demokan Turan and Oguz Kaan Kaya
