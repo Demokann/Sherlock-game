@@ -50,7 +50,7 @@ Below are some screens from the game:
 ![Menu](./assets/images/menu.png)
 
 ### 🧩 Mode Selection
-![Mode Selection](./assets/assets/images/modselection.png)
+![Mode Selection](./assets/images/modselection.png)
 
 ### 🎮 How to Play
 ![How to Play](./assets/images/howtoplay.png)
