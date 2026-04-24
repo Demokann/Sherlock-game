@@ -43,32 +43,20 @@ git clone https://github.com/your-username/sherlock-game.git
 cd sherlock-game
 ```
 
+Made by Demokan Turan and Oguz Kaan Kaya
+
 ## 📸 Screenshots
 
 Below are some screens from the game:
 
-### 🏠 Main Menu
+<p float="left">
+  <img src="./assets/images/menu.png" width="180"/>
+  <img src="./assets/images/modselection.png" width="180"/>
+  <img src="./assets/images/howtoplay.png" width="180"/>
+</p>
 
-![Menu](./assets/images/menu.png)
-
-### 🧩 Mode Selection
-
-![Mode Selection](./assets/images/modselection.png)
-
-### 🎮 How to Play
-
-![How to Play](./assets/images/howtoplay.png)
-
-### 📖 Game Story
-
-![Game Story](./assets/images/gamestory.png)
-
-### 🎲 Game Solution
-
-![Game Solution](./assets/images/gamesolution.png)
-
-### 📚 Stories
-
-![Stories](./assets/images/stories.png)
-
-Made by Demokan Turan and Oguz Kaan Kaya
+<p float="left">
+  <img src="./assets/images/gamestory.png" width="180"/>
+  <img src="./assets/images/gamesolution.png" width="180"/>
+  <img src="./assets/images/stories.png" width="180"/>
+</p>
