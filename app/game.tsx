@@ -29,8 +29,8 @@ export default function GamePage() {
 
   if (!currentStory) return null;
 
-  const onSolvedPress = () => {
-    handleSolved();
+  const onSolvedPress = async () => {
+    await handleSolved();
     if (isManual) router.back();
   };
 
@@ -76,7 +76,7 @@ export default function GamePage() {
                 onPress={onFailedPress}
               >
                 <Ionicons name="close" size={32} color={COLORS.text} />
-                <Text style={styles.actionButtonText}>Çözülemedi</Text>
+                <Text style={styles.actionButtonText}>Pas</Text>
               </Pressable>
 
               <Pressable 

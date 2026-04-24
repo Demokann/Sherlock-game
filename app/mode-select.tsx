@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { FadeInUp } from 'react-native-reanimated';
@@ -38,35 +39,39 @@ export default function ModeSelectPage() {
         colors={[COLORS.background, COLORS.primary]}
         style={StyleSheet.absoluteFill}
       />
-      
-      <Header title="MOD SEÇİMİ" showBack />
 
-      <View style={styles.content}>
-        {modes.map((mode, index) => (
-          <Animated.View 
-            key={mode.id}
-            entering={FadeInUp.delay(index * 200).duration(500)}
-          >
-            <Pressable
-              style={({ pressed }) => [
-                styles.card,
-                { borderColor: mode.color },
-                pressed && styles.cardPressed
-              ]}
-              onPress={() => router.push(mode.route as any)}
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.headerWrapper}>
+          <Header title="MOD SEÇİMİ" showBack />
+        </View>
+
+        <View style={styles.content}>
+          {modes.map((mode, index) => (
+            <Animated.View
+              key={mode.id}
+              entering={FadeInUp.delay(index * 200).duration(500)}
             >
-              <View style={[styles.iconContainer, { backgroundColor: mode.color + '20' }]}>
-                <Ionicons name={mode.icon as any} size={40} color={mode.color} />
-              </View>
-              <View style={styles.textContainer}>
-                <Text style={styles.cardTitle}>{mode.title}</Text>
-                <Text style={styles.cardDescription}>{mode.description}</Text>
-              </View>
-              <Ionicons name="chevron-forward" size={24} color={COLORS.textSecondary} />
-            </Pressable>
-          </Animated.View>
-        ))}
-      </View>
+              <Pressable
+                style={({ pressed }) => [
+                  styles.card,
+                  { borderColor: mode.color },
+                  pressed && styles.cardPressed
+                ]}
+                onPress={() => router.push(mode.route as any)}
+              >
+                <View style={[styles.iconContainer, { backgroundColor: mode.color + '20' }]}>
+                  <Ionicons name={mode.icon as any} size={40} color={mode.color} />
+                </View>
+                <View style={styles.textContainer}>
+                  <Text style={styles.cardTitle}>{mode.title}</Text>
+                  <Text style={styles.cardDescription}>{mode.description}</Text>
+                </View>
+                <Ionicons name="chevron-forward" size={24} color={COLORS.textSecondary} />
+              </Pressable>
+            </Animated.View>
+          ))}
+        </View>
+      </SafeAreaView>
     </View>
   );
 }
@@ -75,6 +80,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
+  },
+  safeArea: {
+    flex: 1,
+  },
+  headerWrapper: {
+    marginTop: 8,
   },
   content: {
     flex: 1,

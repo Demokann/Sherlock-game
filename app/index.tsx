@@ -37,7 +37,7 @@ export default function HomePage() {
         </View>
       </View>
       
-      <Text style={styles.footer}>© 2024 Sherlock Game Studio</Text>
+      <Text style={styles.footer}>© 2026 Deemouzz</Text>
     </SafeAreaView>
   );
 }

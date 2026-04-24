@@ -29,6 +29,13 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "ac3ff2d2-ae8f-47df-9c65-5f011a389889"
+      }
+    },
+    "owner": "demokaan"
   }
 }

@@ -53,7 +53,7 @@ export default function SettingsPage() {
 
         <View style={styles.aboutSection}>
           <Text style={styles.versionText}>Versiyon 1.0.0</Text>
-          <Text style={styles.creditsText}>Made with ❤️ for detectives</Text>
+          <Text style={styles.creditsText}>Made by Demo and Ouzz</Text>
         </View>
       </View>
     </SafeAreaView>

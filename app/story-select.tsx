@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
-import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import Animated, { FadeInRight } from 'react-native-reanimated';
 import { STORIES, Story } from '../data/stories';
@@ -12,7 +13,13 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function StorySelectPage() {
   const router = useRouter();
-  const { solvedIds } = useProgress();
+  const { solvedIds, refreshProgress } = useProgress();
+
+  useFocusEffect(
+    useCallback(() => {
+      void refreshProgress();
+    }, [refreshProgress])
+  );
 
   const renderItem = ({ item, index }: { item: Story; index: number }) => {
     const solved = solvedIds.has(item.id);
@@ -62,16 +69,20 @@ export default function StorySelectPage() {
         colors={[COLORS.background, COLORS.primary]}
         style={StyleSheet.absoluteFill}
       />
-      
-      <Header title="HİKAYELER" showBack />
 
-      <FlatList
-        data={STORIES}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-      />
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.headerWrapper}>
+          <Header title="HİKAYELER" showBack />
+        </View>
+
+        <FlatList
+          data={STORIES}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+        />
+      </SafeAreaView>
     </View>
   );
 }
@@ -81,8 +92,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
+  safeArea: {
+    flex: 1,
+  },
+  headerWrapper: {
+    marginTop: 8,
+  },
   listContent: {
     padding: 20,
+    paddingTop: 24,
     paddingBottom: 40,
   },
   card: {
