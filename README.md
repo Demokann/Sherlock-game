@@ -41,7 +41,7 @@ To run this project on your local machine:
 ```bash
 git clone https://github.com/your-username/sherlock-game.git
 cd sherlock-game
-
+```
 ## 📸 Screenshots
 
 Below are some screens from the game:
@@ -65,4 +65,4 @@ Below are some screens from the game:
 
 ### 📚 Stories
 ![Stories](./images/stories.png)
-```
+
