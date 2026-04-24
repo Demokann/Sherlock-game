@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, SafeAreaView, Modal, Text, Pressable, ScrollView } from 'react-native';
+import { View, StyleSheet, Modal, Text, Pressable, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Header } from '../components/Header';
 import { FlipCard } from '../components/FlipCard';
@@ -9,7 +10,7 @@ import { COLORS } from '../constants/colors';
 import { TYPOGRAPHY } from '../constants/typography';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import Animated, { FadeInDown, SlideInBottom } from 'react-native-reanimated';
+import Animated, { FadeInDown, SlideInDown } from 'react-native-reanimated';
 
 export default function GamePage() {
   const router = useRouter();
@@ -98,7 +99,7 @@ export default function GamePage() {
         onRequestClose={() => setHintModalVisible(false)}
       >
         <View style={styles.modalOverlay}>
-          <Animated.View entering={SlideInBottom} style={styles.modalContent}>
+          <Animated.View entering={SlideInDown} style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>İPUÇLARI</Text>
               <Pressable onPress={() => setHintModalVisible(false)}>

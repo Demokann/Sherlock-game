@@ -12,10 +12,10 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function StorySelectPage() {
   const router = useRouter();
-  const { isSolved, isLoading } = useProgress();
+  const { solvedIds } = useProgress();
 
   const renderItem = ({ item, index }: { item: Story; index: number }) => {
-    const solved = isSolved(item.id);
+    const solved = solvedIds.has(item.id);
 
     return (
       <Animated.View entering={FadeInRight.delay(index * 100).duration(400)}>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     borderLeftColor: COLORS.textSecondary,
   },
   cardPressed: {
-    scale: 0.98,
+    transform: [{ scale: 0.98 }],
   },
   cardContent: {
     flex: 1,

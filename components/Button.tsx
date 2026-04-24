@@ -9,6 +9,7 @@ interface ButtonProps {
   style?: ViewStyle;
   textStyle?: TextStyle;
   variant?: 'primary' | 'secondary' | 'outline';
+  disabled?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({ 
@@ -16,7 +17,8 @@ export const Button: React.FC<ButtonProps> = ({
   onPress, 
   style, 
   textStyle,
-  variant = 'primary' 
+  variant = 'primary',
+  disabled = false
 }) => {
   const getVariantStyle = () => {
     switch (variant) {
@@ -40,9 +42,15 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <TouchableOpacity 
-      style={[styles.button, getVariantStyle(), style]} 
+      style={[
+        styles.button, 
+        getVariantStyle(), 
+        style,
+        disabled && { opacity: 0.5 }
+      ]} 
       onPress={onPress}
       activeOpacity={0.8}
+      disabled={disabled}
     >
       <Text style={[styles.text, getTextStyle(), textStyle]}>
         {title.toUpperCase()}

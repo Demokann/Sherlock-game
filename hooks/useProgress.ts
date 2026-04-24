@@ -5,13 +5,12 @@ const STORAGE_KEY = '@sherlock_solved_stories';
 
 export const useProgress = () => {
   const [solvedIds, setSolvedIds] = useState<Set<string>>(new Set());
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     loadProgress();
   }, []);
 
-  const loadProgress = async () => {
+  const loadProgress = async (): Promise<void> => {
     try {
       const stored = await AsyncStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -19,31 +18,34 @@ export const useProgress = () => {
       }
     } catch (error) {
       console.error('Progress yüklenirken hata:', error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const markAsSolved = useCallback(async (id: string) => {
+  const markSolved = useCallback(async (id: string): Promise<void> => {
     try {
-      const newSolvedIds = new Set(solvedIds);
-      newSolvedIds.add(id);
-      setSolvedIds(newSolvedIds);
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(newSolvedIds)));
+      setSolvedIds((prev) => {
+        const newSolvedIds = new Set(prev);
+        newSolvedIds.add(id);
+        AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(newSolvedIds))).catch(console.error);
+        return newSolvedIds;
+      });
     } catch (error) {
       console.error('Progress kaydedilirken hata:', error);
     }
-  }, [solvedIds]);
+  }, []);
 
-  const isSolved = useCallback((id: string) => {
-    return solvedIds.has(id);
-  }, [solvedIds]);
+  const reset = useCallback(async (): Promise<void> => {
+    try {
+      await AsyncStorage.removeItem(STORAGE_KEY);
+      setSolvedIds(new Set());
+    } catch (error) {
+      console.error('Progress sıfırlanırken hata:', error);
+    }
+  }, []);
 
   return {
     solvedIds,
-    isLoading,
-    markAsSolved,
-    isSolved,
-    refreshProgress: loadProgress,
+    markSolved,
+    reset,
   };
 };

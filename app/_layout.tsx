@@ -13,6 +13,7 @@ export default function RootLayout() {
         style={styles.gradient}
       />
       <Stack
+        initialRouteName="index"
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: 'transparent' },

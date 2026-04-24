@@ -10,7 +10,7 @@ interface GameSessionProps {
 }
 
 export const useGameSession = ({ mode, initialStoryId }: GameSessionProps) => {
-  const { markAsSolved, isSolved } = useProgress();
+  const { markSolved, solvedIds } = useProgress();
   const [currentStory, setCurrentStory] = useState<Story | null>(null);
   const [sessionSolvedIds, setSessionSolvedIds] = useState<Set<string>>(new Set());
   const [lastFailedId, setLastFailedId] = useState<string | null>(null);
@@ -54,7 +54,7 @@ export const useGameSession = ({ mode, initialStoryId }: GameSessionProps) => {
 
   const handleSolved = useCallback(() => {
     if (currentStory) {
-      markAsSolved(currentStory.id);
+      markSolved(currentStory.id);
       setSessionSolvedIds(prev => new Set(prev).add(currentStory.id));
       setLastFailedId(null);
       setHintIndex(0);
@@ -63,7 +63,7 @@ export const useGameSession = ({ mode, initialStoryId }: GameSessionProps) => {
         setCurrentStory(getNextRandomStory());
       }
     }
-  }, [currentStory, markAsSolved, mode, getNextRandomStory]);
+  }, [currentStory, markSolved, mode, getNextRandomStory]);
 
   const handleFailed = useCallback(() => {
     if (currentStory) {
