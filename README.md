@@ -39,8 +39,10 @@ To run this project on your local machine:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/sherlock-game.git
+git clone https://github.com/Demokann/sherlock-game.git
 cd sherlock-game
+npm install
+npx expo start --clear
 ```
 
 Made by Demokan Turan and Oguz Kaan Kaya
