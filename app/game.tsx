@@ -51,6 +51,7 @@ export default function GamePage() {
         
         <View style={styles.content}>
           <FlipCard 
+            key={currentStory.id}
             title={currentStory.title}
             question={currentStory.question}
             solution={currentStory.solution}
@@ -126,7 +127,7 @@ export default function GamePage() {
 
             {hasMoreHints && (
               <Button 
-                title="Sıradaki İpucunu Gör" 
+                title="Siradaki İpucunu Gör" 
                 onPress={showNextHint}
                 style={styles.nextHintBtn}
               />

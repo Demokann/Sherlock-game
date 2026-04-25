@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View, Text, Pressable, Dimensions } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { StyleSheet, View, Text, Dimensions, ScrollView, GestureResponderEvent } from 'react-native';
 import Animated, { 
   useAnimatedStyle, 
   useSharedValue, 
@@ -22,6 +22,8 @@ const CARD_HEIGHT = CARD_WIDTH * 1.4;
 
 export const FlipCard: React.FC<FlipCardProps> = ({ question, solution, title }) => {
   const spin = useSharedValue(0);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
 
   const frontAnimatedStyle = useAnimatedStyle(() => {
     const spinVal = interpolate(spin.value, [0, 1], [0, 180]);
@@ -46,31 +48,80 @@ export const FlipCard: React.FC<FlipCardProps> = ({ question, solution, title })
   });
 
   const handleFlip = () => {
-    spin.value = withTiming(spin.value === 0 ? 1 : 0, { 
+    const next = !isFlipped;
+    setIsFlipped(next);
+    spin.value = withTiming(next ? 1 : 0, { 
       duration: 400,
       easing: Easing.inOut(Easing.ease)
     });
   };
 
+  const handleTouchStart = (event: GestureResponderEvent) => {
+    const { pageX, pageY } = event.nativeEvent;
+    touchStartRef.current = { x: pageX, y: pageY, time: Date.now() };
+  };
+
+  const handleTouchEnd = (event: GestureResponderEvent) => {
+    if (!touchStartRef.current) return;
+
+    const { pageX, pageY } = event.nativeEvent;
+    const dx = Math.abs(pageX - touchStartRef.current.x);
+    const dy = Math.abs(pageY - touchStartRef.current.y);
+    const elapsed = Date.now() - touchStartRef.current.time;
+
+    // A short, stationary touch flips the card; drag gestures remain for scrolling.
+    if (dx < 8 && dy < 8 && elapsed < 300) {
+      handleFlip();
+    }
+
+    touchStartRef.current = null;
+  };
+
   return (
     <View style={styles.container}>
-      <Pressable onPress={handleFlip} style={styles.cardWrapper}>
-        <Animated.View style={[styles.card, styles.cardFront, frontAnimatedStyle]}>
+      <View style={styles.cardWrapper}>
+        <Animated.View
+          style={[styles.card, styles.cardFront, frontAnimatedStyle]}
+          pointerEvents={isFlipped ? 'none' : 'auto'}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={() => {
+            touchStartRef.current = null;
+          }}
+        >
           <Text style={styles.categoryTitle}>{title}</Text>
-          <View style={styles.contentContainer}>
+          <ScrollView
+            style={styles.contentContainer}
+            contentContainerStyle={styles.contentInner}
+            showsVerticalScrollIndicator={false}
+            nestedScrollEnabled
+          >
             <Text style={styles.questionText}>{question}</Text>
-          </View>
+          </ScrollView>
           <Text style={styles.hintText}>Çözümü görmek için dokun</Text>
         </Animated.View>
 
-        <Animated.View style={[styles.card, styles.cardBack, backAnimatedStyle]}>
+        <Animated.View
+          style={[styles.card, styles.cardBack, backAnimatedStyle]}
+          pointerEvents={isFlipped ? 'auto' : 'none'}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={() => {
+            touchStartRef.current = null;
+          }}
+        >
           <Text style={[styles.categoryTitle, { color: COLORS.accent }]}>ÇÖZÜM</Text>
-          <View style={styles.contentContainer}>
+          <ScrollView
+            style={styles.contentContainer}
+            contentContainerStyle={styles.contentInner}
+            showsVerticalScrollIndicator={false}
+            nestedScrollEnabled
+          >
             <Text style={styles.solutionText}>{solution}</Text>
-          </View>
+          </ScrollView>
           <Text style={styles.hintText}>Soruya dönmek için dokun</Text>
         </Animated.View>
-      </Pressable>
+      </View>
     </View>
   );
 };
@@ -117,8 +168,10 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    justifyContent: 'center',
     width: '100%',
+  },
+  contentInner: {
+    paddingVertical: 8,
   },
   questionText: {
     ...TYPOGRAPHY.body,
